@@ -1,9 +1,3 @@
-/**
- * Random Dice Simulator using Node.js Core 'crypto' Module
- * Web Dev III - Lab Assignment 1
- */
-
-// Step 1: Import core crypto, fs, and path modules
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -25,7 +19,7 @@ function simulateDiceRolls(count = 5) {
     for (let i = 1; i <= count; i++) {
         const value = rollDice();
         rolls.push(value);
-        console.log("Roll #" + i + ": 🎲 Dice Rolled: " + value);
+        console.log("Roll #" + i + ":  Dice Rolled: " + value);
     }
 
     // Save history to text file
@@ -40,7 +34,7 @@ const countArg = process.argv[2];
 if (require.main === module) {
     if (!countArg) {
         // Default single roll
-        console.log("🎲 Dice Rolled: " + rollDice());
+        console.log(" Dice Rolled: " + rollDice());
         console.log("\n(Tip: Run 'node dice.js 5' to roll 5 times in a loop)");
     } else {
         const count = parseInt(countArg, 10);
