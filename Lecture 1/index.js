@@ -1,8 +1,3 @@
-/**
- * Master Launcher - Smart Utility Toolkit
- * Web Dev III - Lab Assignment 1
- */
-
 const logger = require('./modules/logger');
 const { calculate } = require('./calculator');
 const { rollDice, simulateDiceRolls } = require('./dice');
