@@ -1,29 +1,4 @@
-/**
- * Custom Module: Logger
- * Web Dev III (Node.js & Express Backend) - Lab Assignment 1
- * 
- * Description:
- * A reusable logging utility that outputs timestamped, color-coded terminal messages.
- */
-
-// ANSI escape codes for terminal styling
-const COLORS = {
-    reset: '\x1b[0m',
-    bright: '\x1b[1m',
-    dim: '\x1b[2m',
-    red: '\x1b[31m',
-    green: '\x1b[32m',
-    yellow: '\x1b[33m',
-    blue: '\x1b[34m',
-    magenta: '\x1b[35m',
-    cyan: '\x1b[36m',
-    white: '\x1b[37m'
-};
-
-/**
- * Returns formatted current timestamp string [YYYY-MM-DD HH:mm:ss]
- * @returns {string}
- */
+// Helper function to format current timestamp [YYYY-MM-DD HH:MM:SS]
 function getTimestamp() {
     const now = new Date();
     const pad = (n) => String(n).padStart(2, '0');
@@ -36,47 +11,28 @@ function getTimestamp() {
     return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 }
 
-/**
- * Log standard info message
- */
+// Simple logger functions
 function info(message) {
-    console.log(`${COLORS.dim}[${getTimestamp()}]${COLORS.reset} ${COLORS.cyan}[INFO]${COLORS.reset} ${message}`);
+    console.log(`[${getTimestamp()}] [INFO] ${message}`);
 }
 
-/**
- * Log success message
- */
 function success(message) {
-    console.log(`${COLORS.dim}[${getTimestamp()}]${COLORS.reset} ${COLORS.green}[SUCCESS]${COLORS.reset} ${message}`);
+    console.log(`[${getTimestamp()}] [SUCCESS] ${message}`);
 }
 
-/**
- * Log warning message
- */
 function warn(message) {
-    console.log(`${COLORS.dim}[${getTimestamp()}]${COLORS.reset} ${COLORS.yellow}[WARN]${COLORS.reset} ${message}`);
+    console.log(`[${getTimestamp()}] [WARN] ${message}`);
 }
 
-/**
- * Log error message
- */
 function error(message) {
-    console.error(`${COLORS.dim}[${getTimestamp()}]${COLORS.reset} ${COLORS.red}[ERROR]${COLORS.reset} ${message}`);
+    console.log(`[${getTimestamp()}] [ERROR] ${message}`);
 }
 
-/**
- * General log message
- */
-function log(message) {
-    console.log(`${COLORS.dim}[${getTimestamp()}]${COLORS.reset} ${message}`);
-}
-
+// Export functions for use in other files
 module.exports = {
     info,
     success,
     warn,
     error,
-    log,
-    getTimestamp,
-    COLORS
+    getTimestamp
 };

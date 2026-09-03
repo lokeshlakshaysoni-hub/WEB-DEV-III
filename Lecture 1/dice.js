@@ -1,77 +1,51 @@
 /**
- * Random Dice Generator using Node.js Core 'crypto' Module
- * Web Dev III (Node.js & Express Backend) - Lab Assignment 1
- * 
- * Description:
- * Generates cryptographically secure random numbers between 1 and 6
- * to simulate realistic dice rolls, supporting single/multiple rolls
- * and saving history to a file.
+ * Random Dice Simulator using Node.js Core 'crypto' Module
+ * Web Dev III - Lab Assignment 1
  */
 
+// Step 1: Import core crypto, fs, and path modules
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const logger = require('./modules/logger');
 
 const historyFile = path.join(__dirname, 'dice_history.txt');
 
-/**
- * Rolls a single standard 6-sided dice (1-6) using crypto.randomInt
- * @returns {number} Value between 1 and 6
- */
+// Step 2: Function to roll a single 6-sided dice (1 to 6)
 function rollDice() {
-    // crypto.randomInt(min, max) generates integer min <= n < max
+    // crypto.randomInt(1, 7) returns integer from 1 to 6
     return crypto.randomInt(1, 7);
 }
 
-/**
- * Simulates multiple dice rolls
- * @param {number} count Number of rolls
- * @param {boolean} saveToFile Whether to append rolls to history log
- */
-function simulateDiceRolls(count = 5, saveToFile = true) {
-    console.log(`\n🎲 Simulating ${count} Dice Roll(s):`);
-    console.log("--------------------------------");
+// Step 3: Function to simulate multiple rolls in a loop
+function simulateDiceRolls(count = 5) {
+    console.log("\nSimulating " + count + " Dice Rolls:");
+    console.log("----------------------------");
 
     const rolls = [];
     for (let i = 1; i <= count; i++) {
         const value = rollDice();
         rolls.push(value);
-        console.log(`Roll #${i}: 🎲 Dice Rolled: ${value}`);
+        console.log("Roll #" + i + ": 🎲 Dice Rolled: " + value);
     }
 
-    if (saveToFile) {
-        const timestamp = logger.getTimestamp();
-        const historyEntry = `[${timestamp}] Rolls (${count}): [${rolls.join(', ')}]\n`;
-        try {
-            fs.appendFileSync(historyFile, historyEntry, 'utf8');
-            console.log(`\n(History saved to ${path.basename(historyFile)})`);
-        } catch (err) {
-            console.error("Failed to save history:", err.message);
-        }
-    }
-
-    return rolls;
+    // Save history to text file
+    const logEntry = "[" + new Date().toISOString() + "] Rolls: " + rolls.join(", ") + "\n";
+    fs.appendFileSync(historyFile, logEntry);
+    console.log("\n(History saved to dice_history.txt)");
 }
 
-// Check CLI arguments
-const args = process.argv.slice(2);
-const rollCount = args[0] ? parseInt(args[0], 10) : 1;
+// Read CLI arguments
+const countArg = process.argv[2];
 
 if (require.main === module) {
-    if (isNaN(rollCount) || rollCount <= 0) {
-        console.log("Usage: node dice.js [number_of_rolls]");
-        console.log("Example: node dice.js 5");
-    } else if (rollCount === 1 && args.length === 0) {
-        const single = rollDice();
-        console.log(`🎲 Dice Rolled: ${single}`);
-        console.log("\n(Tip: Run 'node dice.js 5' to simulate 5 rolls in a loop)");
+    if (!countArg) {
+        // Default single roll
+        console.log("🎲 Dice Rolled: " + rollDice());
+        console.log("\n(Tip: Run 'node dice.js 5' to roll 5 times in a loop)");
     } else {
-        simulateDiceRolls(rollCount);
+        const count = parseInt(countArg, 10);
+        simulateDiceRolls(count);
     }
 }
 
-module.exports = {
-    rollDice,
-    simulateDiceRolls
-};
+module.exports = { rollDice, simulateDiceRolls };
