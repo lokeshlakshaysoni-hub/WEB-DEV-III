@@ -1,9 +1,3 @@
-/**
- * File Manager using Node.js Core 'fs' Module
- * Web Dev III - Lab Assignment 1
- */
-
-// Step 1: Import core fs and path modules
 const fs = require('fs');
 const path = require('path');
 
