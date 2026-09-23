@@ -1,7 +1,3 @@
-/**
- * Custom Module Demonstration & Reusability
- * Web Dev III - Lab Assignment 1
- */
 
 // Step 1: Import our custom modules using require()
 const isEven = require('./modules/isEven');

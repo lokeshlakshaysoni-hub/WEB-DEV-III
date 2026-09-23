@@ -1,9 +1,3 @@
-/**
- * Basic HTTP Server using Node.js Core 'http' Module
- * Web Dev III - Lab Assignment 1
- */
-
-// Step 1: Import core http module
 const http = require('http');
 const logger = require('./modules/logger');
 

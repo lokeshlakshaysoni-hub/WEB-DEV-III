@@ -1,15 +1,10 @@
-/**
- * Master Launcher - Smart Utility Toolkit
- * Web Dev III - Lab Assignment 1
- */
-
 const logger = require('./modules/logger');
 const { calculate } = require('./calculator');
 const { rollDice, simulateDiceRolls } = require('./dice');
 
-console.log("================================================");
+
 console.log("   🚀 SMART UTILITY TOOLKIT - LAB ASSIGNMENT 1   ");
-console.log("================================================\n");
+
 
 console.log("Available Commands:");
 console.log("1. Calculator : node calculator.js add 10 5");
@@ -26,6 +21,6 @@ calculate("add", 10, 5);
 calculate("mult", 6, 7);
 
 console.log("\n--- 2. Dice Demo ---");
-console.log("🎲 Dice Rolled: " + rollDice() + "\n");
+console.log(" Dice Rolled: " + rollDice() + "\n");
 
 logger.success("All utilities are ready to run!");
