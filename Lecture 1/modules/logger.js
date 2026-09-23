@@ -1,4 +1,3 @@
-// Helper function to format current timestamp [YYYY-MM-DD HH:MM:SS]
 function getTimestamp() {
     const now = new Date();
     const pad = (n) => String(n).padStart(2, '0');
@@ -11,7 +10,6 @@ function getTimestamp() {
     return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 }
 
-// Simple logger functions
 function info(message) {
     console.log(`[${getTimestamp()}] [INFO] ${message}`);
 }
@@ -28,7 +26,6 @@ function error(message) {
     console.log(`[${getTimestamp()}] [ERROR] ${message}`);
 }
 
-// Export functions for use in other files
 module.exports = {
     info,
     success,
