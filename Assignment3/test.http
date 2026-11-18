@@ -1,0 +1,110 @@
+@baseUrl = http://localhost:5000
+@productId = PASTE_PRODUCT_ID_HERE
+
+
+### 1. Check server
+GET {{baseUrl}}/
+
+
+### 2. Create product
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+    "name": "Laptop",
+    "sku": "LAP001",
+    "category": "Electronics",
+    "price": 55000,
+    "quantity": 20,
+    "lowStockThreshold": 5,
+    "description": "Dell Inspiron Laptop"
+}
+
+
+### 3. Create another product
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+    "name": "Mouse",
+    "sku": "MOU001",
+    "category": "Accessories",
+    "price": 800,
+    "quantity": 3,
+    "lowStockThreshold": 5,
+    "description": "Wireless Mouse"
+}
+
+
+### 4. Get all products
+GET {{baseUrl}}/api/products
+
+
+### 5. Filter by category
+GET {{baseUrl}}/api/products?category=Electronics
+
+
+### 6. Search by product name
+GET {{baseUrl}}/api/products?search=Laptop
+
+
+### 7. Filter by price
+GET {{baseUrl}}/api/products?minPrice=500&maxPrice=60000
+
+
+### 8. Sort by price (low to high)
+GET {{baseUrl}}/api/products?sort=price
+
+
+### 9. Sort by price (high to low)
+GET {{baseUrl}}/api/products?sort=-price
+
+
+### 10. Pagination
+GET {{baseUrl}}/api/products?page=1&limit=5
+
+
+### 11. Get single product
+GET {{baseUrl}}/api/products/{{productId}}
+
+
+### 12. Update product details
+PUT {{baseUrl}}/api/products/{{productId}}
+Content-Type: application/json
+
+{
+    "price": 60000,
+    "description": "Updated Dell Laptop"
+}
+
+
+### 13. Restock product
+PATCH {{baseUrl}}/api/products/{{productId}}/stock
+Content-Type: application/json
+
+{
+    "action": "restock",
+    "quantity": 10
+}
+
+
+### 14. Sell product
+PATCH {{baseUrl}}/api/products/{{productId}}/stock
+Content-Type: application/json
+
+{
+    "action": "sale",
+    "quantity": 2
+}
+
+
+### 15. Low-stock report
+GET {{baseUrl}}/api/products/reports/low-stock
+
+
+### 16. Category-wise inventory summary
+GET {{baseUrl}}/api/products/reports/category-summary
+
+
+### 17. Delete product
+DELETE {{baseUrl}}/api/products/{{productId}}
